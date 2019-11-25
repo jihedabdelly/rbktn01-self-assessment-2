@@ -35,3 +35,25 @@ var Tree = function(value) {
 
 
 
+Tree.prototype.map = function(mapping) {
+  
+  var clone = new Tree(this.value)
+  
+  clone.value = mapping(value);
+  for(var i = 0; i < clone.children.length; i++) {
+    if(clone.children.length === 0 ) {
+      return clone
+    }
+    clone.children[i].value = mapping(value)
+  }
+
+  clone.children[0].map(mapping)
+  clone.children[1].map(mapping)
+}
+
+Tree.prototype.addChild = function(value) {
+  var child = new Tree(value)
+  this.children.push(child);
+}
+
+
